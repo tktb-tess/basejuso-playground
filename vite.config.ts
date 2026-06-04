@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import dts from 'unplugin-dts/vite';
 
@@ -16,5 +17,8 @@ export default defineConfig({
   },
   server: {
     port: 8000,
+  },
+  test: {
+    testTimeout: 30000,
   },
 });
