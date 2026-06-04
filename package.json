@@ -13,10 +13,11 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "vite build"
   },
   "devDependencies": {
-    "typescript": "~6.0.2",
+    "typescript": "^6.0.2",
+    "unplugin-dts": "^1.0.2",
     "vite": "^8.0.3"
   }
 }
