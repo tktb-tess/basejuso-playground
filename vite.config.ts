@@ -7,7 +7,8 @@ export default defineConfig({
     lib: {
       entry: './lib/main.ts',
       formats: ['es'],
-      fileName: () => 'main.js',
+      fileName: 'main',
+      name: 'BaseJuso',
     },
   },
   preview: {

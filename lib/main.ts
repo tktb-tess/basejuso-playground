@@ -29,6 +29,7 @@ export function toBaseJuso(bin: Uint8Array) {
 
   // 残り
   if (u14Count > 0) {
+    u14 = u14 << (BITS_PER_CHAR - u14Count);
     const letr = table.at(u14);
     if (letr == null) throw TypeError('unexpected');
     str += letr;
@@ -54,6 +55,7 @@ export function fromBaseJuso(baseJuso: string) {
       bin.pop();
       continue;
     }
+
     const u14 = table[letr];
     if (u14 == null) throw TypeError('unexpected');
 
@@ -63,7 +65,7 @@ export function fromBaseJuso(baseJuso: string) {
       u8Count++;
 
       // 8 bit 揃ったらまとめる
-      if (u8Count === 8) {
+      if (u8Count === BITS_PER_BYTE) {
         bin.push(u8);
         u8 = 0;
         u8Count = 0;

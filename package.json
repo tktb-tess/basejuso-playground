@@ -1,23 +1,30 @@
 {
-  "name": "juso",
+  "name": "@tktb-tess/base-juso",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "type": "module",
   "exports": {
-    "types": "./index.d.ts",
-    "default": "./dist/counter.js"
+    "types": "./dist/main.d.ts",
+    "import": "./dist/main.js"
   },
   "files": [
-    "dist",
-    "index.d.ts"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "pack-lib": "pnpm run build && pnpm pack --out pkg/%s.tgz"
   },
   "devDependencies": {
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "unplugin-dts": "^1.0.2",
-    "vite": "^8.0.3"
+    "vite": "^8.0.16"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.5.0",
+      "onFail": "download"
+    }
   }
 }
