@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'inter-var';
+  src: local('Inter');
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'inter-var';
+  src: local('Inter Italic');
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'noto-var';
+  src: local('Noto Sans JP'), local('Noto Sans CJK JP');
+  font-display: swap;
+}
+
+@layer theme, base, component, override;
+
+@layer theme {
+  :root {
+    --color-bg: light-dark(#a0d4ff, #0e1c27);
+    --color-main: Canvas;
+    --color-text: CanvasText;
+  }
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after,
+  ::backdrop {
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+    font: unset;
+    border: unset;
+    background: unset;
+  }
+
+  :root {
+    color-scheme: light dark;
+    font-family: 'inter-var', 'Arial', 'noto-var', sans-serif;
+    text-autospace: normal;
+    text-spacing-trim: trim-start;
+    line-break: strict;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+}
