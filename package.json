@@ -1,5 +1,5 @@
 {
-  "name": "@tktb-tess/base-juso",
+  "name": "basejuso-playground",
   "private": true,
   "version": "0.1.0-alpha.0",
   "type": "module",
@@ -13,12 +13,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "pack-lib": "pnpm run build && pnpm pack --out pkg/%s.tgz",
+    "pack-dist": "pnpm run build && pnpm pack --out pkg/%s.tgz",
     "test": "vitest --run"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "@tktb-tess/util-fns": "^0.13.5",
+    "svelte": "^5.56.1",
     "typescript": "^6.0.3",
-    "unplugin-dts": "^1.0.2",
     "vite": "^8.0.16",
     "vitest": "^4.1.8"
   },
