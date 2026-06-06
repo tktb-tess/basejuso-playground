@@ -18,7 +18,7 @@
   font-display: swap;
 }
 
-@layer theme, base, component, override;
+@layer theme, reset, base, component, override;
 
 @layer theme {
   :root {
@@ -28,7 +28,7 @@
   }
 }
 
-@layer base {
+@layer reset {
   *,
   ::before,
   ::after,
@@ -41,6 +41,13 @@
     background: unset;
   }
 
+  input,
+  button {
+    appearance: none;
+  }
+}
+
+@layer base {
   :root {
     color-scheme: light dark;
     font-family: 'inter-var', 'Arial', 'noto-var', sans-serif;
@@ -49,5 +56,9 @@
     line-break: strict;
     word-break: normal;
     overflow-wrap: anywhere;
+  }
+
+  body {
+    display: flow-root;
   }
 }
