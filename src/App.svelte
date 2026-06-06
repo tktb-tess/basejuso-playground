@@ -1,10 +1,8 @@
 <script lang="ts">
   import type { Result } from './modules/types';
   import { fromBaseJuso, toBaseJuso } from '@tktb-tess/util-fns/basejuso';
+  import { encodeToBaseJuso, decodeBaseJuso } from './modules/convert';
   import { onMount } from 'svelte';
-
-  const enc = new TextEncoder();
-  const dec = new TextDecoder(undefined, { fatal: true });
 
   let inputText = $state('');
   let encoded = $state('');
@@ -12,7 +10,7 @@
     try {
       return {
         success: true,
-        value: dec.decode(fromBaseJuso(encoded)),
+        value: decodeBaseJuso(encoded),
       };
     } catch (e) {
       return {
@@ -32,6 +30,14 @@
         value: fromBaseJuso,
         enumerable: true,
       },
+      encodeToBaseJuso: {
+        value: encodeToBaseJuso,
+        enumerable: true,
+      },
+      decodeBaseJuso: {
+        value: decodeBaseJuso,
+        enumerable: true,
+      },
     });
   });
 </script>
@@ -46,7 +52,7 @@
     <button
       onclick={(ev) => {
         ev.preventDefault();
-        encoded = toBaseJuso(enc.encode(inputText));
+        encoded = encodeToBaseJuso(inputText);
       }}
     >
       変換!
