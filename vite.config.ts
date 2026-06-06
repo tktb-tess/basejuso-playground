@@ -4,7 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
   plugins: [svelte()],
-  base: '/basejuso-playground',
+  base: '/basejuso-playground/',
   build: {},
   preview: {
     port: 8000,
