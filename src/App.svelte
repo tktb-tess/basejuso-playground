@@ -1,17 +1,17 @@
 <script lang="ts">
   import { fromBaseJuso, toBaseJuso } from '@tktb-tess/util-fns/basejuso';
   import type { Result } from './modules/types';
+
+  const enc = new TextEncoder();
+  const dec = new TextDecoder(undefined, { fatal: true });
+
   let inputText = $state('');
-  // const delay = 500;
-  // let timeoutID: ReturnType<typeof setTimeout> | null = null;
-  const encoder = new TextEncoder();
-  const decoder = new TextDecoder(undefined, { fatal: true });
-  const encoded = $derived(toBaseJuso(encoder.encode(inputText)));
+  let encoded = $state('');
   const decoded: Result<string> = $derived.by(() => {
     try {
       return {
         success: true,
-        value: decoder.decode(fromBaseJuso(encoded)),
+        value: dec.decode(fromBaseJuso(encoded)),
       };
     } catch (e) {
       return {
@@ -29,6 +29,14 @@
       <p>{inputText.length * 16} bits</p>
       <textarea id="text-input" bind:value={inputText}></textarea>
     </div>
+    <button
+      onclick={(ev) => {
+        ev.preventDefault();
+        encoded = toBaseJuso(enc.encode(inputText));
+      }}
+    >
+      変換!
+    </button>
     <div>
       <label for="text-encoded">Basejuso</label>
       <p>{encoded.length * 16} bits</p>
@@ -86,6 +94,24 @@
       label,
       p {
         text-align: center;
+      }
+
+      button {
+        background-color: light-dark(#1d003d, #f5ecff);
+        color: Canvas;
+        border-radius: 4px;
+        cursor: pointer;
+        transition-property: opacity;
+        transition-duration: 120ms;
+        transition-timing-function: cubic-bezier(0.25, 0, 0, 1);
+        align-self: center;
+        padding: 0.25rem 1rem;
+
+        @media (any-hover: hover) {
+          &:hover {
+            opacity: 0.75;
+          }
+        }
       }
     }
 
