@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { fromBaseJuso, toBaseJuso } from '@tktb-tess/util-fns/basejuso';
   import type { Result } from './modules/types';
+  import { fromBaseJuso, toBaseJuso } from '@tktb-tess/util-fns/basejuso';
+  import { onMount } from 'svelte';
 
   const enc = new TextEncoder();
   const dec = new TextDecoder(undefined, { fatal: true });
@@ -19,6 +20,19 @@
         error: e,
       };
     }
+  });
+
+  onMount(() => {
+    Object.defineProperties(window, {
+      toBaseJuso: {
+        value: toBaseJuso,
+        enumerable: true,
+      },
+      fromBaseJuso: {
+        value: fromBaseJuso,
+        enumerable: true,
+      },
+    });
   });
 </script>
 
