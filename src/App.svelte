@@ -26,11 +26,13 @@
   <div class="textarea-cont">
     <div>
       <label for="text-input">Input</label>
+      <p>{inputText.length * 16} bits</p>
       <textarea id="text-input" bind:value={inputText}></textarea>
     </div>
     <div>
       <label for="text-encoded">Basejuso</label>
-      <textarea id="text-encoded" readonly>{encoded}</textarea>
+      <p>{encoded.length * 16} bits</p>
+      <textarea id="text-encoded" readonly value={encoded}></textarea>
     </div>
     <div>
       <label for="text-decoded">Decoded</label>
@@ -38,9 +40,8 @@
         id="text-decoded"
         readonly
         class={decoded.success ? '' : 'error'}
-      >
-        {decoded.success ? decoded.value : 'ERROR'}
-      </textarea>
+        value={decoded.success ? decoded.value : 'ERROR'}
+      ></textarea>
     </div>
   </div>
 </main>
@@ -51,22 +52,40 @@
       display: flow-root;
       max-width: 80rem;
       margin-inline: auto;
+      background-color: var(--color-main);
     }
 
     textarea {
-      resize: vertical;
-      height: 16rem;
+      resize: none;
+      font-family: monospace;
+      height: 14rem;
+      border: solid 1px #00000030;
+      border-radius: 4px;
+      width: 100%;
+      padding: 0.25rem;
     }
 
     .textarea-cont {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      padding-inline: 0.4rem;
+      min-height: 100lvh;
+      place-content: center;
 
       > * {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
 
         > * {
           display: block;
         }
+      }
+
+      label,
+      p {
+        text-align: center;
       }
     }
 

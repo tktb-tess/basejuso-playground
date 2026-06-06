@@ -22,7 +22,7 @@
 
 @layer theme {
   :root {
-    --color-bg: light-dark(#a0d4ff, #0e1c27);
+    --color-bg: light-dark(#e9f5ff, #0e1c27);
     --color-main: Canvas;
     --color-text: CanvasText;
   }
@@ -60,5 +60,6 @@
 
   body {
     display: flow-root;
+    background-color: var(--color-bg);
   }
 }
