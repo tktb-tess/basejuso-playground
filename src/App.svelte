@@ -1,24 +1,12 @@
 <script lang="ts">
   import type { Result } from './modules/types';
   import { fromBaseJuso, toBaseJuso } from '@tktb-tess/util-fns/basejuso';
-  import { encodeToBaseJuso, decodeBaseJuso } from './modules/convert';
+  import { encode, decode } from './modules/convert';
   import { onMount } from 'svelte';
 
   let inputText = $state('');
   let encoded = $state('');
-  const decoded: Result<string> = $derived.by(() => {
-    try {
-      return {
-        success: true,
-        value: decodeBaseJuso(encoded),
-      };
-    } catch (e) {
-      return {
-        success: false,
-        error: e,
-      };
-    }
-  });
+  let decoded2: Result<string> = $state({ success: true, value: '' });
 
   onMount(() => {
     Object.defineProperties(window, {
@@ -30,12 +18,12 @@
         value: fromBaseJuso,
         enumerable: true,
       },
-      encodeToBaseJuso: {
-        value: encodeToBaseJuso,
+      encode: {
+        value: encode,
         enumerable: true,
       },
-      decodeBaseJuso: {
-        value: decodeBaseJuso,
+      decode: {
+        value: decode,
         enumerable: true,
       },
     });
@@ -50,15 +38,27 @@
       <textarea id="text-input" bind:value={inputText}></textarea>
     </div>
     <button
-      onclick={(ev) => {
+      onclick={async (ev) => {
         ev.preventDefault();
-        encoded = encodeToBaseJuso(inputText);
+        encoded = await encode(inputText);
+        try {
+          const value = await decode(encoded);
+          decoded2 = {
+            success: true,
+            value,
+          };
+        } catch (error) {
+          decoded2 = {
+            success: false,
+            error,
+          };
+        }
       }}
     >
       変換!
     </button>
     <div>
-      <label for="text-encoded">Basejuso</label>
+      <label for="text-encoded">deflate-raw/Basejuso</label>
       <p>{encoded.length * 16} bits</p>
       <textarea id="text-encoded" readonly value={encoded}></textarea>
     </div>
@@ -67,8 +67,7 @@
       <textarea
         id="text-decoded"
         readonly
-        class={decoded.success ? '' : 'error'}
-        value={decoded.success ? decoded.value : 'ERROR'}
+        value={decoded2.success ? decoded2.value : 'ERROR'}
       ></textarea>
     </div>
   </div>
@@ -133,10 +132,6 @@
           }
         }
       }
-    }
-
-    .error {
-      color: #d40000;
     }
   }
 </style>
