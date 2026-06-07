@@ -211,8 +211,8 @@ importers:
         specifier: ^7.1.2
         version: 7.1.2(svelte@5.56.1)(vite@8.0.16)
       '@tktb-tess/util-fns':
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: ^0.13.6
+        version: 0.13.6
       svelte:
         specifier: ^5.56.1
         version: 5.56.1
@@ -375,8 +375,8 @@ packages:
       svelte: ^5.46.4
       vite: ^8.0.0-beta.7 || ^8.0.0
 
-  '@tktb-tess/util-fns@0.13.5':
-    resolution: {integrity: sha512-433A5RVnUkwcXd/fuo8XAUW/EeOR8IPt9mKr9IGiYxlQiWOSeOlar+rku++mIYwwTZZ7QNH2a5j0v1vLc/MDLw==}
+  '@tktb-tess/util-fns@0.13.6':
+    resolution: {integrity: sha512-dywYFhKDxd9amv3avxg9zTn0F1FN0pGdq9F5uiPTNi3Zli8QB0O8Ha6XN8X8YOzCaCPLWkPJq95rbWa3U8nVYw==}
     engines: {node: '>=22', pnpm: '>=10'}
 
   '@tybys/wasm-util@0.10.2':
@@ -859,7 +859,7 @@ snapshots:
       vite: 8.0.16
       vitefu: 1.1.3(vite@8.0.16)
 
-  '@tktb-tess/util-fns@0.13.5': {}
+  '@tktb-tess/util-fns@0.13.6': {}
 
   '@tybys/wasm-util@0.10.2':
     dependencies:

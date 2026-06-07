@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
-    "@tktb-tess/util-fns": "^0.13.5",
+    "@tktb-tess/util-fns": "^0.13.6",
     "svelte": "^5.56.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.16",
