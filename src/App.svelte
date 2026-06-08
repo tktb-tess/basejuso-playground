@@ -41,6 +41,18 @@
       onclick={async (ev) => {
         ev.preventDefault();
         encoded = await encode(inputText);
+      }}
+    >
+      Encode
+    </button>
+    <div>
+      <label for="text-encoded">deflate-raw/Basejuso</label>
+      <p>{encoded.length * 16} bits</p>
+      <textarea id="text-encoded" bind:value={encoded}></textarea>
+    </div>
+    <button
+      onclick={async (ev) => {
+        ev.preventDefault();
         try {
           const value = await decode(encoded);
           decoded2 = {
@@ -48,6 +60,16 @@
             value,
           };
         } catch (error) {
+          if (error instanceof Error) {
+            const { name, stack, cause, message } = error;
+            console.error(
+              [name, message, stack ?? ''].join('\n') + '\n',
+              cause,
+            );
+          } else {
+            const tag = Object.prototype.toString.call(error);
+            console.error(tag, error);
+          }
           decoded2 = {
             success: false,
             error,
@@ -55,15 +77,11 @@
         }
       }}
     >
-      変換!
+      Decode
     </button>
     <div>
-      <label for="text-encoded">deflate-raw/Basejuso</label>
-      <p>{encoded.length * 16} bits</p>
-      <textarea id="text-encoded" readonly value={encoded}></textarea>
-    </div>
-    <div>
       <label for="text-decoded">Decoded</label>
+      <p>{decoded2.success ? decoded2.value.length * 16 : 0} bits</p>
       <textarea
         id="text-decoded"
         readonly
@@ -80,6 +98,7 @@
       max-width: 80rem;
       margin-inline: auto;
       background-color: var(--color-main);
+      padding-inline: 1rem;
     }
 
     textarea {
@@ -96,7 +115,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
-      padding-inline: 0.4rem;
+      margin: 0.4rem;
       min-height: 100lvh;
       place-content: center;
 
@@ -116,7 +135,7 @@
       }
 
       button {
-        background-color: light-dark(#1d003d, #f5ecff);
+        background-color: light-dark(hsl(270 90 10), hsl(270 90 95));
         color: Canvas;
         border-radius: 4px;
         cursor: pointer;
